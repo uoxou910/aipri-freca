@@ -49,8 +49,18 @@ function buildShell(){
     </div>
 
     <div class="tabs" id="tabs">
-      <button class="tab active" data-c="">すべて</button>
-      ${chars.map(c=>`<button class="tab" data-c="${esc(c)}">${esc(c)}</button>`).join('')}
+      <button class="tab active" data-c="">
+        <span class="tab-icon tab-icon-home" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3.5 10.7 12 3.8l8.5 6.9v8.8a1 1 0 0 1-1 1h-5v-6h-5v6h-5a1 1 0 0 1-1-1z"/></svg>
+        </span>
+        <span class="tab-label">すべて</span>
+      </button>
+      ${chars.map(c=>`<button class="tab" data-c="${esc(c)}">
+        <span class="tab-icon tab-icon-person" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.8 20c.4-4 2.7-6.2 6.2-6.2s5.8 2.2 6.2 6.2"/></svg>
+        </span>
+        <span class="tab-label">${esc(c)}</span>
+      </button>`).join('')}
     </div>
 
     <main class="grid" id="grid"></main>
