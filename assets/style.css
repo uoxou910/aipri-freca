@@ -800,3 +800,151 @@ html,body{
     position:static;
   }
 }
+
+
+/* =========================================================
+   2026-09-07-7 デザイン調整
+   ========================================================= */
+
+/* タイトル文字：ピンクと水色の中間にあるラベンダー系の単色 */
+.title{
+  color:#a982ba!important;
+  background:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
+}
+
+/* タイトルバー：中央に白を挟まず、全面を淡いピンク→水色に */
+.header{
+  background:linear-gradient(
+    100deg,
+    #ffe7f1 0%,
+    #f6e9f7 46%,
+    #e5f5fb 100%
+  )!important;
+  border-bottom:1px solid #eee3ed;
+}
+
+/* PC側の「すべて / キャラ名」選択はグラデーションなし */
+.tab{
+  color:#817482;
+  background:#fff!important;
+  border:1px solid #ece6ed!important;
+  box-shadow:none;
+}
+
+.tab.active{
+  color:#a06691!important;
+  background:#fff0f7!important;
+  border-color:#efc9dc!important;
+  box-shadow:0 4px 13px rgba(204,135,170,.10)!important;
+}
+
+.tab:hover{
+  background:#fff8fb!important;
+  border-color:#e4ccdc!important;
+}
+
+/* PCではアイコンを隠して従来の文字タブに見せる */
+.tab-icon{
+  display:none;
+}
+
+/* スマホ：白い固定ホームバー + アイコン方式 */
+@media (max-width:699px){
+  body{
+    padding-bottom:88px;
+  }
+
+  .tabs{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:40;
+    display:flex;
+    align-items:stretch;
+    justify-content:flex-start;
+    max-width:none;
+    margin:0;
+    padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+    gap:2px;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    background:rgba(255,255,255,.98)!important;
+    border-top:1px solid #eee8ee;
+    box-shadow:0 -7px 24px rgba(92,72,88,.09);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+  }
+
+  .tabs::-webkit-scrollbar{
+    display:none;
+  }
+
+  .tab{
+    flex:1 0 66px;
+    min-width:66px;
+    min-height:58px;
+    margin:0;
+    padding:5px 5px 3px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    border:0!important;
+    border-radius:12px;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:#9d929c!important;
+    font-size:10px;
+    line-height:1.1;
+  }
+
+  .tab:hover{
+    background:transparent!important;
+  }
+
+  .tab.active{
+    color:#a66b91!important;
+    background:#fff2f8!important;
+    border:0!important;
+    box-shadow:none!important;
+  }
+
+  .tab-icon{
+    display:grid;
+    place-items:center;
+    width:25px;
+    height:25px;
+    color:currentColor;
+  }
+
+  .tab-icon svg{
+    width:23px;
+    height:23px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+
+  .tab-icon-home svg path{
+    fill:none;
+  }
+
+  .tab-icon-person svg circle{
+    fill:none;
+  }
+
+  .tab-label{
+    display:block;
+    max-width:64px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+}
