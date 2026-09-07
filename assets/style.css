@@ -99,7 +99,7 @@ button{cursor:pointer}
   outline:0;
   width:100%;
   background:transparent;
-  font-size:14px;
+  font-size:16px;
   color:var(--text)
 }
 
@@ -525,3 +525,5 @@ button{cursor:pointer}
     transform:scale(1.018);
   }
 }
+
+.search input{touch-action:manipulation;}
