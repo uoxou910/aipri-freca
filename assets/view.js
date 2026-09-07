@@ -57,8 +57,10 @@ function buildShell(){
     <div class="pager" id="pager"></div>
 
     <div class="modal" id="modal">
-      <button class="close" id="close">×</button>
-      <img id="modal-img">
+      <div class="modal-content">
+        <img id="modal-img">
+        <button class="close" id="close" aria-label="閉じる">×</button>
+      </div>
     </div>`;
 
   const input=$('#q');
@@ -86,6 +88,29 @@ function buildShell(){
   };
 }
 
+
+function makePageItems(current,total){
+  if(total<=7)return Array.from({length:total},(_,i)=>i+1);
+
+  const items=[1];
+  let start=Math.max(2,current-1);
+  let end=Math.min(total-1,current+1);
+
+  if(current<=3){
+    start=2;
+    end=4;
+  }else if(current>=total-2){
+    start=total-3;
+    end=total-1;
+  }
+
+  if(start>2)items.push('…');
+  for(let i=start;i<=end;i++)items.push(i);
+  if(end<total-1)items.push('…');
+  items.push(total);
+  return items;
+}
+
 function renderResults(){
   const filtered=filteredCards();
   const total=Math.max(1,Math.ceil(filtered.length/PAGE));
@@ -106,17 +131,25 @@ function renderResults(){
       </article>`).join('')
     : '<div class="empty" style="grid-column:1/-1">カードがありません</div>';
 
+  const pageItems=makePageItems(page,total);
   pager.innerHTML=`
-    <button class="btn" id="prev" ${page<=1?'disabled':''}>‹ 前へ</button>
-    <span style="padding:8px;font-size:12px;color:var(--sub)">${page} / ${total}</span>
-    <button class="btn" id="next" ${page>=total?'disabled':''}>次へ ›</button>`;
+    <button class="page-btn page-arrow" data-page="${page-1}" ${page<=1?'disabled':''} aria-label="前のページ">‹</button>
+    ${pageItems.map(p=>p==='…'
+      ? '<span class="page-ellipsis">…</span>'
+      : `<button class="page-btn ${p===page?'active':''}" data-page="${p}">${p}</button>`
+    ).join('')}
+    <button class="page-btn page-arrow" data-page="${page+1}" ${page>=total?'disabled':''} aria-label="次のページ">›</button>`;
 
-  $('#prev').onclick=()=>{
-    if(page>1){page--;renderResults();}
-  };
-  $('#next').onclick=()=>{
-    if(page<total){page++;renderResults();}
-  };
+  pager.querySelectorAll('[data-page]').forEach(btn=>{
+    btn.onclick=()=>{
+      if(btn.disabled)return;
+      const next=Number(btn.dataset.page);
+      if(!Number.isFinite(next)||next<1||next>total||next===page)return;
+      page=next;
+      renderResults();
+      window.scrollTo({top:0,behavior:'smooth'});
+    };
+  });
 
   document.querySelectorAll('.card').forEach(el=>el.onclick=()=>{
     const x=cards.find(x=>String(x.id)===String(el.dataset.id));
