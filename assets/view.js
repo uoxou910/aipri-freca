@@ -34,6 +34,19 @@ function filteredCards(){
   );
 }
 
+
+function getLatestUpdateDate(){
+  const dates=cards
+    .map(x=>new Date(x.created_at))
+    .filter(d=>!Number.isNaN(d.getTime()));
+  if(!dates.length)return '';
+  const latest=new Date(Math.max(...dates.map(d=>d.getTime())));
+  const y=latest.getFullYear();
+  const m=String(latest.getMonth()+1).padStart(2,'0');
+  const day=String(latest.getDate()).padStart(2,'0');
+  return `${y}${m}${day}`;
+}
+
 function buildShell(){
   const chars=[...new Set(cards.map(x=>x.chara).filter(Boolean))];
 
@@ -41,6 +54,7 @@ function buildShell(){
     <header class="header">
       <div class="header-inner">
         <div class="title">${esc(C.appName||'フレカ置き場')}</div>
+        <div class="updated" id="updated"></div>
       </div>
     </header>
 
@@ -72,6 +86,9 @@ function buildShell(){
         <button class="close" id="close" aria-label="閉じる">×</button>
       </div>
     </div>`;
+
+  const latest=getLatestUpdateDate();
+  if(latest)$('#updated').textContent=`更新:${latest}`;
 
   const input=$('#q');
   let timer;
@@ -133,7 +150,12 @@ function renderResults(){
   grid.innerHTML=list.length
     ? list.map((x,i)=>`
       <article class="card" data-id="${x.id}" style="--delay:${Math.min(i,18)*55}ms">
-        <div class="card-img"><img loading="lazy" src="${esc(x.image_url)}"></div>
+        <div class="card-img"><img
+          src="${esc(x.image_url)}"
+          loading="${i<6?'eager':'lazy'}"
+          fetchpriority="${i<3?'high':'auto'}"
+          decoding="async"
+        ></div>
         <div class="card-info">
           <div class="chara">${esc(x.chara||'未設定')}</div>
           <div class="code">${esc(x.code||'')}</div>
