@@ -527,3 +527,26 @@ button{cursor:pointer}
 }
 
 .search input{touch-action:manipulation;}
+
+
+/* ===== iPhone Safari 検索欄ズーム対策 =====
+   iOS Safariは入力欄の実効フォントサイズが16px未満だと自動ズームするため、
+   検索欄だけ16px以上を強制します。 */
+.search input,
+.search input:focus,
+.search input:active{
+  font-size:16px!important;
+  line-height:1.25!important;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  transform:none!important;
+  zoom:1!important;
+}
+
+/* iPhoneのフォームUIが独自縮小されるのを避ける */
+@supports (-webkit-touch-callout:none){
+  .search input{
+    font-size:16px!important;
+    min-height:24px;
+  }
+}
