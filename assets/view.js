@@ -14,7 +14,7 @@ function render(){
   document.body.innerHTML=`
     <header class="header">
       <div class="header-inner">
-        <div class="title">${esc(C.appName||'フレンドカード')}</div>
+        <div class="title">${esc(C.appName||'フレカ置き場')}</div>
       </div>
     </header>
 
