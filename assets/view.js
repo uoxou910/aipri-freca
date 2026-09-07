@@ -5,7 +5,7 @@ const configured=()=>C.gasUrl&&/^https:\/\/script\.google\.com\/macros\/s\//.tes
 async function call(action,params={}){const u=new URL(C.gasUrl);u.searchParams.set('action',action);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));const r=await fetch(u.toString(),{redirect:'follow'});if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.ok)throw new Error(j.error||'API error');return j;}
 async function load(){if(!configured()){document.body.innerHTML='<div class="setup-warning"><b>初期設定が必要です</b><br>assets/config.js の gasUrl にGASのウェブアプリURLを貼り付けてください。<br><br>詳しくは同梱の「はじめかた.txt」をご確認ください。</div>';return}try{cards=(await call('list')).cards||[];render()}catch(e){document.body.innerHTML='<div class="setup-warning"><b>データを読み込めませんでした</b><br>GASのデプロイ設定とURLをご確認ください。<br><small>'+esc(e.message)+'</small></div>'}}
 function render(){
-  const filtered=cards.filter(x=>(!chara||x.chara===chara)&&(!q||(`${x.chara} ${x.code}`).toLowerCase().includes(q.toLowerCase())));
+  const filtered=cards.filter(x=>(!chara||x.chara===chara)&&(!q||String(x.code||'').toLowerCase().includes(q.toLowerCase())));
   const total=Math.max(1,Math.ceil(filtered.length/PAGE));
   page=Math.min(page,total);
   const list=filtered.slice((page-1)*PAGE,page*PAGE);
