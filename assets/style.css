@@ -948,3 +948,100 @@ html,body{
     white-space:nowrap;
   }
 }
+
+
+/* =========================================================
+   2026-09-07-8 微調整
+   ========================================================= */
+
+/* タイトルバー：少し濃いピンク→紫→水色 */
+.header{
+  background:linear-gradient(
+    100deg,
+    #ef9fc3 0%,
+    #cfa7d7 48%,
+    #8fd3e9 100%
+  )!important;
+  border-bottom:0!important;
+  box-shadow:0 5px 22px rgba(131,102,139,.13)!important;
+}
+
+.header-inner{
+  position:relative;
+}
+
+.title{
+  color:#fff!important;
+  background:none!important;
+  -webkit-text-fill-color:#fff!important;
+  text-shadow:0 1px 2px rgba(108,72,108,.12);
+}
+
+/* 最後に画像を追加した日 */
+.updated{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:rgba(255,255,255,.92);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+
+/* ページ番号：淡い選択色 + 完全な丸 */
+.page-btn{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  border-radius:9999px!important;
+  background-clip:padding-box!important;
+  outline:none!important;
+}
+
+.page-btn:not(.page-arrow){
+  width:36px!important;
+  min-width:36px!important;
+  max-width:36px!important;
+  padding:0!important;
+}
+
+.page-btn.active{
+  color:#9a6d8d!important;
+  border:1px solid #ead4e3!important;
+  background:linear-gradient(
+    135deg,
+    #fde6f0 0%,
+    #f5e7f7 52%,
+    #e1f4fa 100%
+  )!important;
+  box-shadow:0 4px 12px rgba(173,139,188,.10)!important;
+}
+
+/* スマホ下部ナビ：項目が2～3個でも横に伸びすぎない。
+   5項目（すべて + 4人）が1画面に収まりやすい幅。 */
+@media (max-width:699px){
+  .tabs{
+    justify-content:center!important;
+    padding-left:6px!important;
+    padding-right:6px!important;
+  }
+
+  .tab{
+    flex:0 0 calc((100vw - 12px) / 5)!important;
+    width:calc((100vw - 12px) / 5)!important;
+    min-width:0!important;
+    max-width:76px!important;
+  }
+
+  .tab-label{
+    max-width:100%!important;
+  }
+
+  .updated{
+    right:10px;
+    font-size:9px;
+  }
+}
