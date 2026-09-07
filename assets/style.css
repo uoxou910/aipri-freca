@@ -1045,3 +1045,159 @@ html,body{
     font-size:9px;
   }
 }
+
+
+/* =========================================================
+   管理画面強化 2026-09-07-9
+   ========================================================= */
+.admin-search input{
+  font-size:16px!important;
+}
+
+.admin-public-count{
+  color:var(--sub);
+  font-weight:500;
+}
+
+.admin-card-wrap{
+  animation:adminCardIn .48s cubic-bezier(.2,.75,.25,1) both;
+  animation-delay:var(--delay,0ms);
+}
+
+@keyframes adminCardIn{
+  from{
+    opacity:0;
+    transform:translateY(16px) scale(.985);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.edit-card{
+  transition:
+    transform .20s ease,
+    box-shadow .20s ease,
+    border-color .20s ease,
+    opacity .20s ease;
+}
+
+.admin-card-wrap:hover .edit-card{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(160,128,155,.13);
+  border-color:#dfc9dc;
+}
+
+.admin-image-button{
+  position:relative;
+  width:86px;
+  height:129px;
+  padding:0;
+  border:0;
+  border-radius:10px;
+  overflow:hidden;
+  background:#fff2f7;
+  cursor:zoom-in;
+}
+
+.admin-image-button img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+  transition:transform .24s ease,filter .2s ease;
+}
+
+.admin-image-button:hover img{
+  transform:scale(1.025);
+}
+
+.admin-card-wrap.is-hidden .edit-card{
+  background:#faf9fb;
+  border-style:dashed;
+}
+
+.admin-card-wrap.is-hidden .admin-image-button img{
+  filter:saturate(.55);
+  opacity:.68;
+}
+
+.hidden-badge{
+  position:absolute;
+  left:6px;
+  bottom:6px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(64,57,64,.82);
+  color:#fff;
+  font-size:9px;
+  font-weight:700;
+  line-height:1;
+}
+
+.visibility-row{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.visibility-state{
+  flex:1;
+  min-width:0;
+  font-size:10px;
+  font-weight:700;
+}
+
+.visibility-state.public{
+  color:#5f9a74;
+}
+
+.visibility-state.private{
+  color:#9a8f99;
+}
+
+.visibility-toggle{
+  white-space:nowrap;
+  font-size:10px;
+  padding:7px 9px;
+}
+
+.admin-modal{
+  z-index:90;
+}
+
+.admin-modal .modal-content img{
+  max-width:min(620px,88vw);
+  max-height:88vh;
+}
+
+@media (hover:none) and (pointer:coarse){
+  .admin-card-wrap:active .edit-card{
+    transform:translateY(-3px) scale(.995);
+    box-shadow:0 10px 25px rgba(160,128,155,.13);
+  }
+}
+
+@media (max-width:699px){
+  .admin{
+    padding-bottom:28px;
+  }
+
+  .admin-header .header-inner{
+    min-height:70px;
+    height:auto;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+
+  .head-actions{
+    gap:5px;
+  }
+
+  .head-actions .btn{
+    padding:7px 8px;
+    font-size:10px;
+  }
+}
