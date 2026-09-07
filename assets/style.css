@@ -502,3 +502,26 @@ button{cursor:pointer}
     scroll-behavior:auto!important
   }
 }
+
+
+/* ===== スマホ・タッチ操作のカードアニメーション =====
+   表示時の cardIn はPC/スマホ共通。
+   スマホではタップしている間、少し浮いて反応します。 */
+@media (hover:none) and (pointer:coarse){
+  .card{
+    transition:
+      transform .18s ease,
+      box-shadow .18s ease,
+      border-color .18s ease;
+  }
+
+  .card:active{
+    transform:translateY(-5px) scale(.99);
+    box-shadow:0 14px 34px rgba(190,112,150,.20);
+    border-color:#e9bfd2;
+  }
+
+  .card:active .card-img img{
+    transform:scale(1.018);
+  }
+}
