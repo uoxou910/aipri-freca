@@ -550,3 +550,253 @@ button{cursor:pointer}
     min-height:24px;
   }
 }
+
+
+/* =========================================================
+   公開ページ 2026-09-07
+   白ベース + ピンク / 水色グラデーション
+   ========================================================= */
+:root{
+  --text:#45404a;
+  --sub:#8d8491;
+  --line:#eee8ef;
+  --bg:#ffffff;
+  --card:#ffffff;
+  --accent:#ef8fba;
+  --accent-dark:#d76c9f;
+  --accent-blue:#8ed7ee;
+  --accent-soft:#fff1f7;
+  --radius:18px;
+  --shadow:0 8px 25px rgba(203,147,180,.10);
+  --shadow-hover:0 18px 42px rgba(168,139,190,.18);
+}
+
+html,body{
+  background:
+    radial-gradient(circle at 8% 8%, rgba(255,207,228,.22), transparent 28rem),
+    radial-gradient(circle at 92% 14%, rgba(188,232,246,.22), transparent 30rem),
+    #fff;
+}
+
+/* 上部タイトル部分は白を中心に、端だけ淡く色づけ */
+.header{
+  background:
+    linear-gradient(100deg,
+      rgba(255,219,235,.70) 0%,
+      rgba(255,255,255,.97) 28%,
+      rgba(255,255,255,.97) 72%,
+      rgba(205,239,249,.72) 100%);
+  border-bottom:1px solid rgba(226,213,225,.72);
+  box-shadow:0 5px 24px rgba(177,143,170,.07);
+}
+
+.title{
+  color:#665865;
+  background:linear-gradient(90deg,#e878ad 0%,#a978c7 48%,#70c7e6 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero{
+  padding-top:22px;
+}
+
+.search{
+  background:rgba(255,255,255,.96);
+  border:1px solid #eee7ef;
+  box-shadow:0 5px 22px rgba(175,142,166,.08);
+}
+
+.search:focus-within{
+  border-color:#cbb9db;
+  box-shadow:
+    0 0 0 4px rgba(238,143,186,.08),
+    0 0 0 7px rgba(142,215,238,.045);
+}
+
+.tab{
+  background:rgba(255,255,255,.96);
+  border-color:#ece6ed;
+}
+
+.tab:hover{
+  border-color:#d8bdd5;
+}
+
+.tab.active{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(100deg,#ee8db9 0%,#d69acb 47%,#8dd5ec 100%);
+  box-shadow:0 6px 18px rgba(183,139,190,.20);
+}
+
+.card{
+  border-color:#eee9ef;
+}
+
+.card:hover{
+  border-color:#dfc8dd;
+}
+
+.card-img{
+  background:
+    linear-gradient(135deg,rgba(255,229,240,.65),rgba(226,246,251,.72));
+}
+
+/* ===== ページ番号 ===== */
+.pager{
+  gap:7px;
+  flex-wrap:wrap;
+  padding:28px 12px 40px;
+}
+
+.page-btn{
+  min-width:36px;
+  height:36px;
+  padding:0 10px;
+  border:1px solid #ebe5ec;
+  border-radius:999px;
+  background:#fff;
+  color:#817482;
+  font-size:12px;
+  font-weight:600;
+  box-shadow:0 3px 12px rgba(176,141,166,.06);
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+
+.page-btn:hover:not(:disabled){
+  transform:translateY(-2px);
+  border-color:#d7bfd6;
+  box-shadow:0 6px 16px rgba(176,141,166,.11);
+}
+
+.page-btn.active{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(135deg,#ed8ab6,#9edcf0);
+  box-shadow:0 6px 17px rgba(173,139,188,.22);
+}
+
+.page-btn:disabled{
+  opacity:.32;
+  cursor:default;
+}
+
+.page-arrow{
+  font-size:18px;
+  font-weight:500;
+}
+
+.page-ellipsis{
+  min-width:20px;
+  text-align:center;
+  color:#aaa0aa;
+  font-size:13px;
+}
+
+/* ===== 拡大画像と閉じるボタン ===== */
+.modal{
+  padding:28px;
+  background:rgba(54,47,56,.68);
+}
+
+.modal-content{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  max-width:94vw;
+  max-height:92vh;
+}
+
+.modal .modal-content img{
+  display:block;
+  max-width:min(520px,88vw);
+  max-height:88vh;
+  border-radius:18px;
+  object-fit:contain;
+  background:#fff;
+  box-shadow:0 24px 70px rgba(40,20,30,.30);
+  animation:modalIn .22s ease both;
+}
+
+.close{
+  position:absolute;
+  right:-16px;
+  top:-16px;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:2px solid rgba(255,255,255,.96);
+  border-radius:50%;
+  background:linear-gradient(135deg,#fff,#fff7fb);
+  color:#d96e9f;
+  font-size:21px;
+  line-height:1;
+  box-shadow:0 7px 24px rgba(42,29,37,.20);
+  z-index:2;
+}
+
+/* ===== スマホだけキャラ切替を画面下部へ固定 ===== */
+@media (max-width:699px){
+  body{
+    padding-bottom:94px;
+  }
+
+  .tabs{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:40;
+    max-width:none;
+    margin:0;
+    padding:9px 10px calc(9px + env(safe-area-inset-bottom));
+    gap:7px;
+    background:
+      linear-gradient(100deg,
+        rgba(255,232,242,.96),
+        rgba(255,255,255,.98) 43%,
+        rgba(229,247,252,.97));
+    border-top:1px solid rgba(226,213,225,.85);
+    box-shadow:0 -8px 28px rgba(119,91,113,.10);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+
+  .tab{
+    flex:0 0 auto;
+    padding:9px 14px;
+    box-shadow:0 2px 9px rgba(176,141,166,.05);
+  }
+
+  .pager{
+    padding-bottom:28px;
+  }
+
+  .modal{
+    padding:24px;
+  }
+
+  .modal .modal-content img{
+    max-width:88vw;
+    max-height:82vh;
+  }
+
+  .close{
+    right:-13px;
+    top:-13px;
+    width:38px;
+    height:38px;
+  }
+}
+
+/* PCでは従来どおり上部タブ */
+@media (min-width:700px){
+  .tabs{
+    position:static;
+  }
+}
