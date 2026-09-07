@@ -4,6 +4,15 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 let cards=[],q='',chara='',page=1;
 const PAGE=30;
 
+function normalizeSearchText(s){
+  return String(s??'')
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/[\u30a1-\u30f6]/g,ch =>
+      String.fromCharCode(ch.charCodeAt(0)-0x60)
+    );
+}
+
 async function load(){
   document.body.innerHTML='<div class="loading">読み込み中...</div>';
   try{
@@ -21,7 +30,7 @@ async function load(){
 function filteredCards(){
   return cards.filter(x=>
     (!chara||x.chara===chara) &&
-    (!q||String(x.code||'').toLowerCase().includes(q.toLowerCase()))
+    (!q||normalizeSearchText(x.code).includes(normalizeSearchText(q)))
   );
 }
 
