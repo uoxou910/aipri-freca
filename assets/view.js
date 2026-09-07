@@ -19,7 +19,7 @@ function render(){
     </header>
 
     <div class="hero">
-      <div class="search">⌕<input id="q" placeholder="カードを検索" value="${esc(q)}"></div>
+      <div class="search">⌕<input id="q" placeholder="コーデ名で検索" value="${esc(q)}"></div>
     </div>
 
     <div class="tabs">
@@ -51,7 +51,13 @@ function render(){
       <img id="modal-img">
     </div>`;
 
-  $('#q').oninput=e=>{q=e.target.value;page=1;render()};
+  $('#q').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      q=e.target.value.trim();
+      page=1;
+      render();
+    }
+  });
   document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{chara=b.dataset.c;page=1;render()});
   $('#prev').onclick=()=>{page--;render()};
   $('#next').onclick=()=>{page++;render()};
